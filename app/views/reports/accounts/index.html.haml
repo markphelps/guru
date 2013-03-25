@@ -1,0 +1,41 @@
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        = @report.name
+        .pull-right
+          .btn-row
+            .btn-group
+              = link_to 'All', reports_accounts_path, class: 'btn btn-white'
+              = link_to 'Up To Date', reports_accounts_path(type: :up_to_date), class: 'btn btn-white'
+              = link_to 'Due', reports_accounts_path(type: :due), class: 'btn btn-white'
+              = link_to 'Past Due', reports_accounts_path(type: :past_due), class: 'btn btn-white'
+        .clearfix
+      .panel-body
+        - unless @accounts.empty?
+          %table.table.table-hover
+            %thead
+              %tr
+                %th First Name
+                %th Last Name
+                %th Status
+                %th Membership Type
+                %th Payment Due Date
+                %th Balance
+            %tbody
+              - @accounts.each do |account|
+                %tr
+                  %td= link_to account.member.first_name, account.member
+                  %td= link_to account.member.last_name, account.member
+                  %td
+                    %span.label{style: "background: #{account.color}; padding: 5px 10px"}
+                      = account.status
+                  %td= account.member.membership_type.to_s.capitalize
+                  %td= l account.payment_due_date
+                  %td= link_to number_to_currency(account.balance, negative_format: "(%u%n)"), account.member
+          .pull-right
+            = link_to reports_accounts_export_path do
+              %i.fa.fa-cloud-download
+              Download
+          .text-center
+            = paginate @accounts

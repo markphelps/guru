@@ -1,0 +1,15 @@
+.panel
+  .panel-heading
+    Notes
+  .panel-body
+    - unless @member.notes.empty?
+      %table.table.table-hover
+        %tbody
+          %thead
+            %th.col-lg-10
+            %th Date
+          - @member.notes.each do |note|
+            %tr
+              %td= link_to note.body, edit_member_note_path(@member, note)
+              %td= l note.updated_at
+    = link_to 'New Note', new_member_note_path(@member), class: 'btn btn-primary'

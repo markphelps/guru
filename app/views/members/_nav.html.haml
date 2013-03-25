@@ -1,0 +1,24 @@
+.profile-nav
+  .panel
+    .user-heading
+      .round
+        - unless @member.image_url.blank?
+          = link_to @member do
+            = image_tag @member.image_url.to_s
+      %h1= @member.name
+      %p
+        - if @member.phone?
+          %p= number_to_phone @member.phone
+    %ul.nav.nav-pills.nav-stacked
+      %li{class: "#{'active' if controller?('members') || controller?('memberships') }"}
+        = link_to @member do
+          %i.fa.fa-user
+          Profile
+      %li{class: "#{'active' if controller?('attendance') }"}
+        = link_to member_visits_path @member do
+          %i.fa.fa-calendar
+          Attendance
+      %li{class: "#{'active' if controller?('payments') }"}
+        = link_to member_payments_path @member do
+          %i.fa.fa-usd
+          Payments

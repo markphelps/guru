@@ -1,0 +1,10 @@
+= form_for [@member, @note], html: { class: 'form-horizontal' } do |f|
+  = render 'layouts/shared/errors', object: @note
+  .form-group
+    .col-lg-10
+      = f.text_area :body, class: 'form-control'
+  %br/
+  = f.submit nil, class: 'btn btn-primary'
+  - if action?('edit')
+    = link_to 'Delete Note', [@member, @note], confirm: 'Are you sure?', method: 'delete', class: 'btn btn-danger'
+  = link_to 'Cancel', @member, class: 'btn'

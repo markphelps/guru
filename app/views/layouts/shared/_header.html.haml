@@ -1,0 +1,12 @@
+/ notify-row start
+#top_menu.nav.notify-row
+  / notification start
+  //= render 'layouts/shared/notifications'
+  / notification end
+/ notifiy-row end
+/ top-nav start
+.top-nav.hidden-xs
+  %ul.nav.pull-right.top-menu
+    %li
+      = render 'members/search'
+/ top-nav end

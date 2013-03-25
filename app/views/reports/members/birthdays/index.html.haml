@@ -1,0 +1,44 @@
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        .month
+          - unless @report.january?
+            = link_to reports_members_birthdays_path(month: @report.prev_month) do
+              .i.fa.fa-chevron-left
+            &nbsp;
+          = @report.name
+          - unless @report.december?
+            &nbsp;
+            = link_to reports_members_birthdays_path(month: @report.next_month) do
+              .i.fa.fa-chevron-right
+      .panel-body
+        - unless @members.empty?
+          #flip-scroll
+            %table.table.table-hover
+              %thead
+                %tr
+                  %th First Name
+                  %th Last Name
+                  %th Level
+                  %th Phone
+                  %th Email
+                  %th Birthday
+              %tbody
+                - @members.each do |member|
+                  %tr
+                    %td= link_to member.first_name, member
+                    %td= link_to member.last_name, member
+                    %td
+                      - unless member.level.nil?
+                        %span.label{style: "background: #{member.level.color}"}
+                          = member.level.name
+                    %td= number_to_phone member.phone if member.phone?
+                    %td= mail_to member.email if member.email?
+                    %td= l member.birthday if member.birthday?
+          .pull-right
+            = link_to reports_members_birthdays_export_path(month: @report.month) do
+              %i.fa.fa-cloud-download
+              Download
+          .text-center
+            = paginate @members

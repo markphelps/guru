@@ -1,0 +1,15 @@
+.row
+  .col-lg-10
+    .panel
+      .panel-heading
+        New Note
+      .panel-body
+        = form_for @note, url: member_notes_path(@member), method: 'post', html: { class: 'form-horizontal' } do |f|
+          = render 'layouts/shared/errors', object: @note
+          .form-group
+            .col-lg-10
+              = f.text_area :body, class: 'form-control'
+          %br/
+          = f.submit nil, class: 'btn btn-primary'
+          = link_to 'Cancel', @member, class: 'btn'
+

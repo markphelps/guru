@@ -1,0 +1,19 @@
+= form_for [@member, @visit], html: { class: 'form-horizontal' } do |f|
+  = render 'layouts/shared/errors', object: @visit
+  .form-group
+    = f.label :visit_date, 'Date', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-calendar
+        = f.text_field :visit_date, "placeholder data-mask" => "99/99/9999", "data-date-format" => "mm/dd/yyyy", class: 'form-control datepicker default-date-picker', value: l(@visit.visit_date || Date.current)
+  .form-group
+    = f.label :klass_id, 'Class', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        = f.select :klass_id, grouped_options_for_select([['Today', current_studio.klasses.today.map {|k| [k.name_and_time, k.id] } ], ['All', current_studio.klasses.map {|k| [k.name_day_and_time, k.id] } ]])
+  %br/
+  = f.submit nil, class: 'btn btn-primary'
+  - if action?('edit')
+    = link_to 'Delete Visit', member_visit_path(@member, @visit), confirm: 'Are you sure?', method: 'delete', class: 'btn btn-danger'
+  = link_to 'Cancel', member_visits_path(@member), class: 'btn'

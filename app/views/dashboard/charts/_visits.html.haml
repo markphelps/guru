@@ -1,0 +1,6 @@
+.col-lg-12
+  .panel
+    .panel-heading
+      = link_to 'Recent Visits', reports_attendance_path
+    .panel-body
+      = line_chart dashboard_visits_path, library: { xAxis: { type: 'datetime', dateTimeLabelFormats: { day: '%m/%d/%y' } } }, discrete: true

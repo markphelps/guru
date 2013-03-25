@@ -1,0 +1,19 @@
+.col-lg-4
+  .panel
+    .panel-heading
+      = link_to 'Top 10 Levels', levels_path
+    .panel-body
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-lg-6 Name
+            %th Color
+            %th Members
+        %tbody
+          - @levels.each do |level|
+            %tr
+              %td= link_to level.name, edit_level_path(level)
+              %td
+                %span.label{style: "background: #{level.color}; padding: 5px 30px"}
+                  &nbsp;
+              %td= level.members_count

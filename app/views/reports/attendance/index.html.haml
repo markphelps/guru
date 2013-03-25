@@ -1,0 +1,52 @@
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        .month.pull-left
+          - unless @report.january?
+            = link_to reports_attendance_path(month: @report.prev_month, year: @report.year) do
+              .i.fa.fa-chevron-left
+            &nbsp;
+          = @report.name
+          - unless @report.december?
+            &nbsp;
+            = link_to reports_attendance_path(month: @report.next_month, year: @report.year) do
+              .i.fa.fa-chevron-right
+        .year.pull-right
+          - unless @report.first_year?
+            = link_to reports_attendance_path(month: @report.month, year: @report.prev_year) do
+              .i.fa.fa-chevron-left
+            &nbsp;
+          = @report.year
+          - unless @report.current_year?
+            &nbsp;
+            = link_to reports_attendance_path(month: @report.month, year: @report.next_year) do
+              .i.fa.fa-chevron-right
+        .clearfix
+      .panel-body
+        - unless @members.empty?
+          %table.table.table-hover
+            %thead
+              %tr
+                %th First Name
+                %th Last Name
+                %th Level
+                %th Last Visit
+                %th Visits
+            %tbody
+              - @members.each do |member|
+                %tr
+                  %td= link_to member.first_name, member
+                  %td= link_to member.last_name, member
+                  %td
+                    - unless member.level.nil?
+                      %span.label{style: "background: #{member.level.color}"}
+                        = member.level.name
+                  %td= l member.visit_date.to_date
+                  %td= link_to member.visits_count, member_visits_path(member)
+          .pull-right
+            = link_to reports_attendance_export_path(month: @report.month, year: @report.year) do
+              %i.fa.fa-cloud-download
+              Download
+          .text-center
+            = paginate @members

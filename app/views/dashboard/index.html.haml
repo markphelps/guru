@@ -1,0 +1,14 @@
+= content_for :js do
+  = javascript_include_tag 'highcharts', 'chartkick'
+.row
+  .state-overview
+    = render_cell(:accounts, :past_due, current_studio)
+    = render_cell(:accounts, :due, current_studio)
+    = render_cell(:accounts, :up_to_date, current_studio)
+    = render_cell(:payments, :monthly_revenue, current_studio)
+.row
+  = render 'dashboard/charts/visits'
+.row
+  = render_cell(:classes, :today, current_studio)
+  = render_cell(:levels, :top, current_studio)
+  = render 'dashboard/charts/sources'

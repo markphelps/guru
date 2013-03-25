@@ -1,0 +1,32 @@
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        Levels
+      .panel-body
+        - unless @levels.empty?
+          %table.table.table-hover
+            %thead
+              %tr
+                %th Name
+                %th Color
+                %th Members
+                %th
+            %tbody
+              - @levels.each do |level|
+                %tr
+                  %td= level.name
+                  %td
+                    %span.label{style: "background: #{level.color}; padding: 5px 30px"}
+                      &nbsp;
+                  %td= level.members.count
+                  %td
+                    = link_to edit_level_path(level), class: 'btn btn-sm btn-default' do
+                      %i.fa.fa-edit
+          .pull-right
+            = link_to export_levels_path do
+              %i.fa.fa-cloud-download
+              Download
+          .text-center
+            = paginate @levels
+        = link_to 'New Level', new_level_path, class: 'btn btn-primary'

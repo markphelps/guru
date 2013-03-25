@@ -1,0 +1,62 @@
+%aside
+  #sidebar.nav-collapse
+    / sidebar menu start
+    %ul.sidebar-menu#nav-accordion
+      %li
+        = link_to '/', class: "#{'active' if controller?('dashboard')}" do
+          %i.fa.fa-dashboard
+          %span Dashboard
+      %li
+        = link_to members_path, class: "#{'active' if members_controller?}" do
+          %i.fa.fa-user
+          %span Members
+      %li
+        = link_to classes_path, class: "#{'active' if controller?('classes')}" do
+          %i.fa.fa-group
+          %span Classes
+      %li
+        = link_to levels_path, class: "#{'active' if controller?('levels')}" do
+          %i.fa.fa-list
+          %span Levels
+      %li
+        = link_to sources_path, class: "#{'active' if controller?('sources')}" do
+          %i.fa.fa-filter
+          %span Sources
+      %li.sub-menu
+        = link_to '#', class: "#{'active' if reports_controller?}" do
+          %i.fa.fa-bar-chart-o
+          %span Reports
+        %ul.sub
+          %li.sub-menu
+            = link_to 'Members', '#', {class: "#{'active' if controller?('reports/members/recent') || controller?('reports/members/birthdays')}"}
+            %ul.sub
+              %li.sub-menu
+                %li{class: "#{'active' if controller?('reports/members/recent') && action?('index')}"}
+                  = link_to 'Recent', reports_members_recent_path
+                %li{class: "#{'active' if controller?('reports/members/birthdays') && action?('index')}"}
+                  = link_to 'Birthdays', reports_members_birthdays_path
+                  
+          %li{class: "#{'active' if controller?('reports/attendance') && action?('index')}"}
+            = link_to 'Attendance', reports_attendance_path
+
+          %li{class: "#{'active' if controller?('reports/accounts') && action?('index')}"}
+            = link_to 'Accounts', reports_accounts_path
+
+          %li{class: "#{'active' if controller?('reports/payments') && action?('index')}"}
+            = link_to 'Payments', reports_payments_path
+      %li.sub-menu
+        = link_to '#', class: "#{'active' if settings_controller?}" do
+          %i.fa.fa-cog
+          %span Settings
+        %ul.sub
+          %li{class: "#{'active' if controller?('settings/studios')}"}
+            = link_to 'Studio', edit_settings_studio_path
+          %li{class: "#{'active' if controller?('settings/members')}"}
+            = link_to 'Members', edit_settings_member_path
+          %li{class: "#{'active' if controller?('settings/users')}"}
+            = link_to 'Users', settings_users_path
+      %li
+        = link_to destroy_user_session_path, method: :delete do
+          %i.fa.fa-sign-out
+          %span Logout
+    / sidebar menu end

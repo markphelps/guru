@@ -1,0 +1,19 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    = favicon_link_tag 'favicon.ico'
+    %title= content_for?(:title) ? yield(:title) : 'StudioJoy'
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application'
+  %body
+    %section#container
+      .login-body
+        .container
+          = render 'layouts/shared/messages'
+          = yield
+  / body end
+  / js placed at the end of the document so the pages load faster
+  = javascript_include_tag 'application'

@@ -1,0 +1,7 @@
+.col-lg-3
+  .panel
+    .symbol.red
+      %i.fa.fa-warning
+    .value
+      %h1= @count
+      %p= link_to 'Past Due Accounts'.pluralize(@count), reports_accounts_path(type: :past_due)

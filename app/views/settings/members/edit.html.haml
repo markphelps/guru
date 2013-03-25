@@ -1,0 +1,18 @@
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        Edit Member Settings
+      .panel-body
+        = form_for @member_settings, url: settings_member_path, html: { class: 'form-horizontal' } do |f|
+          = render 'layouts/shared/errors', object: @member_settings
+          .form-group
+            = f.label :default_payment_due_day_enabled, 'Default Payment Due Day Enabled', class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-2
+              = f.check_box :default_payment_due_day_enabled, class: 'check_box'
+          .form-group
+            = f.label :default_payment_due_day, 'Default Payment Due Day', class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-1
+              = select_day @member_settings.default_payment_due_day || 1, {}, { id: 'settings_member_default_payment_due_day', name: 'settings_member[default_payment_due_day]'}
+          %br/
+          = f.submit 'Update Settings', class: 'btn btn-primary'

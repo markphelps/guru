@@ -1,0 +1,4 @@
+= form_tag members_path, class: "form-inline", method: :get do
+  .form-group
+    .col-lg-10
+      = text_field_tag :query, params[:query], type: 'search', class: 'form-control', placeholder: "Search Members"

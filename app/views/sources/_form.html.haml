@@ -1,0 +1,11 @@
+= form_for [@source], html: { class: 'form-horizontal' } do |f|
+  = render 'layouts/shared/errors', object: @source
+  .form-group
+    = f.label :name, 'Source', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.text_field :name, class: 'form-control'
+  %br/
+  = f.submit nil, class: 'btn btn-primary'
+  - if action?('edit')
+    = link_to 'Delete Source', [@source], confirm: 'Are you sure?', method: 'delete', class: 'btn btn-danger'
+  = link_to 'Cancel', edit_settings_member_path, class: 'btn'

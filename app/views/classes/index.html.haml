@@ -1,0 +1,32 @@
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        Classes
+      .panel-body
+        - unless @klasses.empty?
+          %table.table.table-hover
+            %thead
+              %tr
+                %th Name
+                %th Day of Week
+                %th Time
+                %th.hidden-xs Recurring
+                %th Actions
+            %tbody
+              - @klasses.each do |klass|
+                %tr
+                  %td= klass.name
+                  %td= klass.day_of_week
+                  %td= l klass.class_time, format: :time
+                  %td.hidden-xs= icon klass.recurring?, 'check'
+                  %td
+                    = link_to edit_class_path(klass), class: 'btn btn-sm btn-default' do
+                      %i.fa.fa-edit
+          .pull-right
+            = link_to export_classes_path do
+              %i.fa.fa-cloud-download
+              Download
+          .text-center
+            = paginate @klasses
+        = link_to 'New Class', new_class_path, class: 'btn btn-primary'

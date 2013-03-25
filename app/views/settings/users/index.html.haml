@@ -1,0 +1,33 @@
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        Users
+      .panel-body
+        - unless @users.empty?
+          %table.table.table-hover
+            %thead
+              %tr
+                %th First Name
+                %th Last Name
+                %th Phone
+                %th Email
+                %th Owner
+                %th Created At
+                %th Actions
+            %tbody
+              - @users.each do |user|
+                %tr
+                  %td= link_to "#{user.first_name}", edit_settings_user_path(user)
+                  %td= link_to "#{user.last_name}", edit_settings_user_path(user)
+                  %td= number_to_phone user.phone if user.phone?
+                  %td= mail_to user.email if user.email?
+                  %td= icon user.owner?, 'check'
+                  %td= l user.created_at
+                  %td
+                    = link_to edit_settings_user_path(user), class: 'btn btn-small btn-default' do
+                      %i.fa.fa-edit
+                    - if user.can_destroy?
+                      = link_to settings_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-small btn-danger' do
+                        %i.fa.fa-trash-o
+        = link_to 'New User', new_settings_user_path, class: 'btn btn-primary'

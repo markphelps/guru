@@ -1,0 +1,8 @@
+- if object.errors.any?
+  .error_explanation
+    .alert.alert-block.alert-danger
+      %button{ 'data-dismiss' => 'alert', class: 'close close-sm', type: 'button'}
+        %i.fa.fa-remove
+      %ul
+        - object.errors.full_messages.each do |msg|
+          %li= msg

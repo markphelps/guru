@@ -1,0 +1,29 @@
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        New Class
+      .panel-body
+        = form_for @klass, url: classes_path, html: { class: 'form-horizontal' } do |f|
+          = render 'layouts/shared/errors', object: @klass
+          .form-group
+            = f.label :name, 'Name', class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              = f.text_field :name, class: 'form-control'
+          .form-group
+            = f.label :day_of_week, class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              .input-group
+                = f.select :day_of_week, Date::DAYNAMES, selected: Date.current.strftime("%A")
+          .form-group
+            = f.label :class_time, 'Time', class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              .input-group
+                = f.time_select :class_time, {:minute_step => 15, :ampm => true}
+          .form-group
+            = f.label :recurring, 'Recurring', class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              = f.check_box :recurring, class: 'check_box'
+          %br/
+          = f.submit 'Create Class', class: 'btn btn-primary'
+          = link_to 'Cancel', classes_path, class: 'btn'

@@ -1,0 +1,37 @@
+.row
+  .col-lg-3
+    = render 'members/nav'
+  .col-lg-9
+    .panel
+      .panel-heading
+        Payments
+      .panel-body
+        - unless @payments.empty?
+          %table.table.table-hover
+            %thead
+              %tr
+                %th Date
+                %th Amount
+                %th Due Date
+                %th Amount Due
+                %th Method
+                %th Actions
+            %tbody
+              - @payments.each do |payment|
+                %tr
+                  %td= l payment.payment_date
+                  %td= number_to_currency(payment.payment_amount, negative_format: "(%u%n)")
+                  %td= l payment.due_date
+                  %td= number_to_currency(payment.amount_due, negative_format: "(%u%n)")
+                  %td= payment.payment_method.to_s.capitalize
+                  %td
+                    = link_to member_payment_path(@member, payment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-small btn-danger' do
+                      %i.fa.fa-trash-o
+          .pull-right
+            = link_to export_member_payments_path @member do
+              %i.fa.fa-cloud-download
+              Download
+          .text-center
+            = paginate @payments
+        %br/
+        = link_to 'New Payment', new_member_payment_path(@member), class: 'btn btn-primary'

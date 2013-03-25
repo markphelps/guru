@@ -1,0 +1,18 @@
+= form_for [@member, @account], url: member_account_path(@member), html: { class: 'form-horizontal' } do |f|
+  = render 'layouts/shared/errors', object: @account
+  .form-group
+    = f.label :payment_due_date, 'Payment Due Date', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-calendar
+        = f.text_field :payment_due_date, "placeholder data-mask" => "99/99/9999", "data-date-format" => "mm/dd/yyyy", class: 'form-control datepicker default-date-picker', value: l(@account.payment_due_date || Account.default_payment_due_date(current_studio))
+  .form-group
+    = f.label :balance, class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon $
+        = f.text_field :balance, class: 'form-control'
+  %br/
+  = f.submit nil, class: 'btn btn-primary'
+  = link_to 'Cancel', @member, class: 'btn'

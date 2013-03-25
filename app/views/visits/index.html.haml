@@ -1,0 +1,17 @@
+= content_for :js do
+  = javascript_include_tag 'visits'
+.row
+  .col-lg-3
+    = render 'members/nav'
+  .col-lg-9
+    .panel
+      .panel-heading
+        Attendance
+      .panel-body
+        #calendar.has-toolbar.fc
+        %br/
+        .pull-right
+          = link_to export_member_visits_path @member do
+            %i.fa.fa-cloud-download
+            Download
+        = link_to 'New Visit', new_member_visit_path(@member), class: 'btn btn-primary'

@@ -1,0 +1,74 @@
+= content_for :js do
+  = javascript_include_tag 'members'
+.panel.hidden-xs.hidden-sm
+  .panel-body
+    %ul.summary-list
+      = render_cell(:members, :total_count, current_studio)
+      = render_cell(:members, :recent_count, current_studio)
+      = render_cell(:members, :birthdays, current_studio)
+      = render_cell(:members, :active, current_studio)
+      = render_cell(:members, :inactive, current_studio)
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        = @title ||= 'Members'
+        .pull-right
+          .btn-row
+            .btn-group
+              = link_to 'All', members_path, class: 'btn btn-white'
+              = link_to 'Active', active_members_path, class: 'btn btn-white'
+              = link_to 'Inactive', inactive_members_path, class: 'btn btn-white'
+        .clearfix
+      .panel-body
+        - unless @members.empty?
+          = form_tag destroy_multiple_members_path, method: :delete do
+            #flip-scroll
+              %fieldset
+                %table.table.table-hover
+                  %thead
+                    %tr
+                      %th.hidden-sm.hidden-xs
+                        %input{ type: :checkbox, class: 'checkall'}
+                      %th First Name
+                      %th Last Name
+                      %th Status
+                      %th Level
+                      %th Birthday
+                      %th Date Added
+                      %th Actions
+                  %tbody
+                    - @members.each do |member|
+                      %tr
+                        %td.hidden-sm.hidden-xs= check_box_tag 'members[]', member.id, false, id: "member_id_#{member.id}"
+                        %td= link_to member.first_name, member
+                        %td= link_to member.last_name, member
+                        %td
+                          - unless member.account.nil?
+                            %span.label{style: "background: #{member.account.color}; padding: 5px 10px"}
+                              = member.account.status
+                        %td
+                          - unless member.level.nil?
+                            %span.label{style: "background: #{member.level.color}; padding: 5px 10px"}
+                              = member.level.name
+                        %td= l member.birthday if member.birthday?
+                        %td= l member.created_at
+                        %td
+                          = link_to new_member_visit_path(member), class: 'btn btn-sm btn-info' do
+                            %i.fa.fa-calendar
+                          = link_to new_member_payment_path(member), class: 'btn btn-sm btn-success' do
+                            %i.fa.fa-usd
+                          = link_to edit_member_path(member), class: 'btn btn-sm btn-default' do
+                            %i.fa.fa-edit
+            .pull-right
+              = link_to export_members_path do
+                %i.fa.fa-cloud-download
+                Download
+            .text-center
+              = paginate @members
+            = link_to 'New Member', new_member_path, class: 'btn btn-primary'
+            = link_to 'Import Members', new_member_import_path, class: 'btn btn-info hidden-sm hidden-xs' if @members.count > 0
+            = submit_tag 'Delete Members', class: 'btn btn-danger hidden-sm hidden-xs', data: { confirm: "Are you sure?" }
+        - else
+          = link_to 'New Member', new_member_path, class: 'btn btn-primary'
+          = link_to 'Import Members', new_member_import_path, class: 'btn btn-info hidden-sm hidden-xs' if @members.count > 0

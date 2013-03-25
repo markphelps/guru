@@ -1,0 +1,76 @@
+.row
+  .col-lg-3
+    = render 'nav'
+  .col-lg-9
+    .row
+      .col-lg-12
+        .panel
+          .panel-heading
+            Info
+            = link_to edit_member_path(@member), class: 'pull-right' do
+              %i.fa.fa-edit
+          .panel-body.bio-graph-info
+            .row
+              - if @member.email?
+                .bio-row
+                  %p
+                    %span Email:
+                    = mail_to @member.email
+              - if @member.birthday?
+                .bio-row
+                  %p
+                    %span Birthday:
+                    = l @member.birthday
+              - if @member.address?
+                .bio-row
+                  %p
+                    %span Street Address:
+                    = @member.try(:street_address)
+                .bio-row
+                  %p
+                    %span City:
+                    = @member.try(:city)
+                .bio-row
+                  %p
+                    %span State:
+                    = @member.try(:state)
+                .bio-row
+                  %p
+                    %span Zip:
+                    = @member.try(:zip)
+              - if @member.start_date?
+                .bio-row
+                  %p
+                    %span Start Date:
+                    = l @member.start_date
+              - if @member.end_date?
+                .bio-row
+                  %p
+                    %span End Date:
+                    = l @member.end_date
+              .bio-row
+                %p
+                  %span Membership Type:
+                  = @member.membership_type.to_s.capitalize
+              .bio-row
+                %p
+                  %span Membership Price:
+                  = number_to_currency @member.membership_price
+              - unless @member.source.nil?
+                .bio-row
+                  %p
+                    %span Source:
+                    = @member.source.name
+              - unless @member.level.nil?
+                .bio-row
+                  %p
+                    %span Level:
+                    %span.label{style: "background: #{@member.level.color}"}
+                      = @member.level.name
+    - if @member.account?
+      .row
+        .col-lg-12
+          = render 'accounts/show'
+    .row
+      .col-lg-12
+        = render 'members/notes/index'

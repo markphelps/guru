@@ -1,0 +1,7 @@
+.col-lg-3
+  .panel
+    .symbol.yellow
+      %i.fa.fa-exclamation
+    .value
+      %h1= @count
+      %p= link_to 'Due Accounts'.pluralize(@count), reports_accounts_path(type: :due)

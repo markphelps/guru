@@ -1,0 +1,40 @@
+= form_for [@member, @payment], html: { class: 'form-horizontal' } do |f|
+  = render 'layouts/shared/errors', object: @payment
+  .form-group
+    = f.label :membership_type, 'Membership Type', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        = f.text_field :membership_type, class: 'form-control', disabled: true, value: @member.membership_type.to_s.capitalize
+  .form-group
+    = f.label :due_date, 'Due Date', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-calendar
+        = f.text_field :due_date, "placeholder data-mask" => "99/99/9999", class: 'form-control', readonly: true, value: l(@member.account_payment_due_date || Date.current)
+  .form-group
+    = f.label :amount_due, class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon $
+        = f.text_field :amount_due, class: 'form-control', readonly: true, value: number_to_currency(@member.account_balance, unit: '', negative_format: "(%u%n)")
+  .form-group
+    = f.label :payment_date, 'Payment Date', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-calendar
+        = f.text_field :payment_date, "placeholder data-mask" => "99/99/9999", "data-date-format" => "mm/dd/yyyy", class: 'form-control datepicker default-date-picker', value: l(Date.current)
+  .form-group
+    = f.label :payment_amount, 'Payment Amount', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon $
+        = f.text_field :payment_amount, class: 'form-control', value: number_to_currency(@member.default_payment_amount, unit: '')
+  .form-group
+    = f.label :payment_method, 'Method', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.select :payment_method, PaymentMethod.all.collect {|t| [t.to_s.capitalize, t.to_s]}
+  %br/
+  = f.submit nil, class: 'btn btn-primary'
+  = link_to 'Cancel', member_payments_path(@member), class: 'btn'

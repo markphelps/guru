@@ -1,0 +1,42 @@
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        Edit Studio Settings
+      .panel-body
+        = form_for @studio, url: settings_studio_path, html: { class: 'form-horizontal' } do |f|
+          = render 'layouts/shared/errors', object: @studio
+          .form-group
+            = f.label :name, class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              = f.text_field :name, class: 'form-control'
+          .form-group
+            = f.label :street_address, 'Street Address', class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              = f.text_field :street_address, class: 'form-control'
+          .form-group
+            = f.label :city, class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              = f.text_field :city, class: 'form-control'
+          .form-group
+            = f.label :state, class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              = f.subregion_select :state, 'US', include_blank: 'None'
+          .form-group
+            = f.label :zip, class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              = f.text_field :zip, class: 'form-control'
+          .form-group
+            = f.label :phone, class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              = f.text_field :phone, "placeholder data-mask" => "(999) 999-9999", class: 'form-control'
+          .form-group
+            = f.label :email, class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              = f.email_field :email, class: 'form-control'
+          .form-group
+            = f.label :time_zone, 'Time Zone', class: 'col-lg-2 col-sm-2 control-label'
+            .col-lg-10
+              = f.collection_select :time_zone, ActiveSupport::TimeZone.us_zones, :name, :to_s
+          %br/
+          = f.submit nil, class: 'btn btn-primary'

@@ -1,0 +1,3 @@
+web: bundle exec unicorn -p $PORT -E development
+mail: mailcatcher -f
+elasticsearch: elasticsearch -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml

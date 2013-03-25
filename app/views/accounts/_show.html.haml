@@ -1,0 +1,20 @@
+.panel
+  .panel-heading
+    Account
+    = link_to edit_member_account_path(@member), class: 'pull-right' do
+      %i.fa.fa-edit
+  .panel-body.bio-graph-info
+    .row
+      .bio-row
+        %p
+          %span Status:
+          %span.label{style: "background: #{@member.account.color}; padding: 5px 10px"}
+            = @member.account.status
+      .bio-row
+        %p
+          %span Due Date:
+          = l @member.account_payment_due_date
+      .bio-row
+        %p
+          %span Balance:
+          = number_to_currency(@member.account_balance, negative_format: "(%u%n)")

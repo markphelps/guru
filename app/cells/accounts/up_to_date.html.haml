@@ -1,0 +1,7 @@
+.col-lg-3
+  .panel
+    .symbol.blue
+      %i.fa.fa-check
+    .value
+      %h1= @count
+      %p= link_to 'Up To Date Accounts'.pluralize(@count), reports_accounts_path(type: :up_to_date)

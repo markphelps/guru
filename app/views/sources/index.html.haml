@@ -1,0 +1,25 @@
+.panel
+  .panel-heading
+    Sources
+  .panel-body
+    - unless @sources.empty?
+      %table.table.table-hover
+        %tbody
+          %thead
+            %th Source
+            %th Members
+            %th Actions
+          - @sources.each do |source|
+            %tr
+              %td= link_to source.name, edit_source_path(source)
+              %td= source.members.count
+              %td
+                = link_to edit_source_path(source), class: 'btn btn-sm btn-default' do
+                  %i.fa.fa-edit
+      .pull-right
+        = link_to export_sources_path do
+          %i.fa.fa-cloud-download
+          Download
+      .text-center
+        = paginate @sources
+    = link_to 'New Source', new_source_path, class: 'btn btn-primary'

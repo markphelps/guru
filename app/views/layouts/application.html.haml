@@ -1,0 +1,38 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    = favicon_link_tag 'favicon.ico'
+    %title= content_for?(:title) ? yield(:title) : 'StudioJoy'
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application'
+  %body
+    %section#container
+      / header start
+      %header.header.white-bg
+        .sidebar-toggle-box
+          .fa.fa-bars.tooltips{"data-original-title" => "Toggle Navigation", "data-placement" => "right"}
+        / logo start
+        %a.logo{href: "#"}
+          StudioJoy
+          %span
+            %i.fa.fa-chevron-right
+            = current_studio.name
+        / logo end
+        = render 'layouts/shared/header'
+      / header end
+      / sidebar start
+      = render 'layouts/shared/sidebar'
+      / sidebar end
+      / main content start
+      %section#main-content
+        %section.wrapper
+          = render 'layouts/shared/messages'
+          = yield
+    / section container end
+  / body end
+  / js placed at the end of the document so the pages load faster
+  = javascript_include_tag 'application'
+  = yield :js

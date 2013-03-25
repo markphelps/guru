@@ -1,0 +1,17 @@
+AllCops:
+  Include:
+    - Rakefile
+    - config.ru
+  Exclude:
+    - db/*
+    - bin/*
+    - config/**/*
+    - script/**/*
+    - app/admin/*
+    - app/enums/*
+LineLength:
+  Enabled: false
+ActionFilter:
+  Enabled: false
+Documentation:
+  Enabled: false

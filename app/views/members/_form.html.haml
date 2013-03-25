@@ -1,0 +1,91 @@
+= form_for @member, html: { class: 'form-horizontal' } do |f|
+  = render 'layouts/shared/errors', object: @member
+  .form-group
+    = f.label :first_name, 'First Name', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.text_field :first_name, class: 'form-control'
+  .form-group
+    = f.label :last_name, 'Last Name', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.text_field :last_name, class: 'form-control'
+  .form-group
+    = f.label :street_address, 'Street Address', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.text_field :street_address, class: 'form-control'
+  .form-group
+    = f.label :city, class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.text_field :city, class: 'form-control'
+  .form-group
+    = f.label :state, class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.subregion_select :state, 'US', include_blank: 'None'
+  .form-group
+    = f.label :zip, class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.text_field :zip, class: 'form-control'
+  .form-group
+    = f.label :phone, class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.text_field :phone, "placeholder data-mask" => "(999) 999-9999", class: 'form-control'
+  .form-group
+    = f.label :email, class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.email_field :email, class: 'form-control'
+  .form-group
+    = f.label :birthday, class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-calendar
+        = f.text_field :birthday, "placeholder data-mask" => "99/99/9999", "data-date-format" => "mm/dd/yyyy", class: 'form-control datepicker default-date-picker'
+  .form-group
+    = f.label :start_date, 'Start Date', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-calendar
+        = f.text_field :start_date, "placeholder data-mask" => "99/99/9999", "data-date-format" => "mm/dd/yyyy", class: 'form-control datepicker default-date-picker'
+  .form-group
+    = f.label :end_date, 'End Date', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-calendar
+        = f.text_field :end_date, "placeholder data-mask" => "99/99/9999", "data-date-format" => "mm/dd/yyyy", class: 'form-control datepicker default-date-picker'
+  .form-group
+    = f.label :membership_type, 'Membership Type', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.select :membership_type, MembershipType.all.collect {|t| [t.to_s.capitalize, t.to_s]}
+  .form-group
+    = f.label :membership_price, 'Membership Price', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      .input-group
+        %span.input-group-addon $
+        = f.text_field :membership_price, class: 'form-control'
+  .form-group
+    = f.label :source, 'Source', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.collection_select(:source_id, current_studio.sources, :id, :name, prompt: true)
+  .form-group
+    = f.label :level, 'Level', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.collection_select(:level_id, current_studio.levels, :id, :name, prompt: true)
+  .form-group
+    = f.label :image, class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.file_field :image
+      = f.hidden_field :image_cache
+  .form-group
+    = f.label :remove_image, 'Remove Image', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.check_box :remove_image, class: 'check_box'
+  .form-group
+    = f.label :active, 'Active', class: 'col-lg-2 col-sm-2 control-label'
+    .col-lg-10
+      = f.check_box :active, class: 'check_box'
+  %br/
+  = f.submit nil, class: 'btn btn-primary'
+  - if action?('edit')
+    = link_to 'Delete Member', @member, confirm: 'Are you sure?', method: 'delete', class: 'btn btn-danger'
+  = link_to 'Cancel', @member, class: 'btn'

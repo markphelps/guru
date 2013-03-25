@@ -1,0 +1,49 @@
+.row
+  .col-lg-12
+    .panel
+      .panel-heading
+        .month.pull-left
+          - unless @report.january?
+            = link_to reports_payments_path(month: @report.prev_month, year: @report.year) do
+              .i.fa.fa-chevron-left
+            &nbsp;
+          = @report.name
+          - unless @report.december?
+            &nbsp;
+            = link_to reports_payments_path(month: @report.next_month, year: @report.year) do
+              .i.fa.fa-chevron-right
+        .year.pull-right
+          - unless @report.first_year?
+            = link_to reports_payments_path(month: @report.month, year: @report.prev_year) do
+              .i.fa.fa-chevron-left
+            &nbsp;
+          = @report.year
+          - unless @report.current_year?
+            &nbsp;
+            = link_to reports_payments_path(month: @report.month, year: @report.next_year) do
+              .i.fa.fa-chevron-right
+        .clearfix
+      .panel-body
+        - unless @payments.empty?
+          %table.table.table-hover
+            %thead
+              %tr
+                %th First Name
+                %th Last Name
+                %th Last Payment
+                %th Payments
+                %th Total
+            %tbody
+              - @payments.each do |payment|
+                %tr
+                  %td= link_to payment.account.member.first_name, payment.account.member
+                  %td= link_to payment.account.member.last_name, payment.account.member
+                  %td= l payment.payment_date
+                  %td= link_to payment.payments_count, member_payments_path(payment.account.member)
+                  %td= link_to number_to_currency(payment.total, negative_format: "(%u%n)"), member_payments_path(payment.account.member)
+          .pull-right
+            = link_to reports_payments_export_path(month: @report.month, year: @report.year) do
+              %i.fa.fa-cloud-download
+              Download
+          .text-center
+            = paginate @payments

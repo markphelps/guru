@@ -1,0 +1,18 @@
+.col-lg-4
+  .panel
+    .panel-heading
+      = link_to "#{@today} Classes", classes_path
+    .panel-body
+      - unless @klasses.empty?
+        %table.table.table-hover
+          %thead
+            %tr
+              %th.col-lg-9 Name
+              %th Time
+          %tbody
+            - @klasses.each do |klass|
+              %tr
+                %td= link_to klass.name, edit_class_path(klass)
+                %td= l(klass.class_time, format: :time)
+      - else
+        = link_to 'New Class', new_class_path, class: 'btn btn-primary'
