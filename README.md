@@ -1,12 +1,12 @@
-guru
+Guru
 ====
 
-Open sourcing [StudioJoy](http://studiojoy.net)
+Guru is the open source version of [StudioJoy](http://studiojoy.net), a SAAS member management solution for Martial Arts Studios. Guru was my initial 'working name' for [StudioJoy](http://studiojoy.net) so I chose to leave it when open sourcing.
 
-Guru is the open source version of StudioJoy, a CMS application for Martial Arts Studios. Guru was my initial 'working name' for StudioJoy so I chose to leave it when open sourcing.
-
-To read more about the reasoning/development of Guru/StudioJoy checkout my [blog](http://www.markphelps.me/2014/11/09/failure.html).
+To read more about the reasoning/development of Guru checkout my [blog](http://www.markphelps.me/).
 
 ### TODO
 - Make easier to run locally (docker?)
-
+- List dependencies
+- How to run tests
+- Screenshots
