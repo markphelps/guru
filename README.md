@@ -6,10 +6,14 @@ Guru is the open source version of [StudioJoy](http://studiojoy.net), a SAAS mem
 To read more about the reasoning/development of Guru checkout my [blog](http://www.markphelps.me/).
 
 ### Screenshots
+
+#### Dashboard
 ![dashboard](/screenshots/dashboard.png?raw=true)
 
+#### Attendance
 ![visits](/screenshots/visits.png?raw=true)
 
+#### Member List
 ![members](/screenshots/members.png?raw=true)
 
 ### TODO
