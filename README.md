@@ -1,9 +1,7 @@
 Guru
 ====
 
-Open sourcing [StudioJoy](http://studiojoy.net)
-
-Guru is the open source version of StudioJoy, a Member Management solution for Martial Arts Studios. Guru was my initial 'working name' for StudioJoy so I chose to leave it when open sourcing.
+Guru is the open source version of [StudioJoy](http://studiojoy.net), a SAAS member management solution for Martial Arts Studios. Guru was my initial 'working name' for [StudioJoy](http://studiojoy.net) so I chose to leave it when open sourcing.
 
 To read more about the reasoning/development of Guru checkout my [blog](http://www.markphelps.me/).
 
