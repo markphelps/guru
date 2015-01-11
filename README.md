@@ -21,3 +21,6 @@ To read more about the reasoning/development of Guru checkout my [blog](http://w
 * Ruby ~> 2.1.2
 * Rails 3.2.19
 * Elasticsearch (Version: 1.4.2, Build: 927caff/2014-12-16T14:11:12Z, JVM: 1.7.0_67)
+
+### License
+[WTFPL](http://www.wtfpl.net/)
