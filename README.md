@@ -1,7 +1,7 @@
 Guru
 ====
 
-Guru is the open source version of [StudioJoy](http://studiojoy.net), a SAAS member management solution for Martial Arts Studios. Guru was my initial 'working name' for [StudioJoy](http://studiojoy.net) so I chose to leave it when open sourcing.
+Guru is the open source version of [StudioJoy](http://studiojoy.net), a SaaS member management solution for Martial Arts Studios. Guru was my initial 'working name' for [StudioJoy](http://studiojoy.net) so I chose to leave it when open sourcing.
 
 To read more about the reasoning/development of Guru checkout my [blog](http://www.markphelps.me/).
 
@@ -21,3 +21,6 @@ To read more about the reasoning/development of Guru checkout my [blog](http://w
 * Ruby ~> 2.1.2
 * Rails 3.2.19
 * Elasticsearch (Version: 1.4.2, Build: 927caff/2014-12-16T14:11:12Z, JVM: 1.7.0_67)
+
+### License
+[WTFPL](http://www.wtfpl.net/)
