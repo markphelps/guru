@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:10
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=guru
+      - POSTGRES_USER=guru
+
+  elasticsearch:
+    image: elasticsearch:1.4
+
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - ELASTICSEARCH_URL=elasticsearch:9200
+    depends_on:
+      - db
+      - elasticsearch
+    volumes:
+      - .:/app
+      - gemdata:/gems
+    command: bundle exec unicorn -p 3000 -E development
+
+volumes:
+  gemdata:

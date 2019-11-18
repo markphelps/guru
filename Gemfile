@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
 
 gem 'rails', '3.2.19'
 
@@ -28,7 +27,7 @@ gem 'jquery-rails', '~> 2.1'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails', '~> 4.2.0'
 gem 'inherited_resources'
-gem 'pg'
+gem 'pg', '~> 0.18'
 gem 'haml'
 gem 'haml-rails'
 gem 'activeadmin'
